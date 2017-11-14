@@ -1,0 +1,103 @@
+
+	Unilasalle-RJ - AV2
+	Aluno: FELIPE RAMALHO                                Matricula: 005001620
+	Prova Av2 de Laboratorio de Sistemas Operacionais
+	Professor: Alex Salgado
+	2o. Semestre de 2017   Turno: Noite
+
+----------------------------------------------------------------------------------------------
+
+1-(valor 1,5 pontos) Quantos erros tem no script abaixo? Qual(is) são eles?
+	case "$file" in
+	    *.txt)
+		echo "É um arquivo de texto."
+		cat "$file"
+	    *.gif|*.jpg|*.png)
+		echo "É uma figura."
+		xloadimage "$file"
+	    *)
+		echo "Não sei que arquivo é esse."
+	esac
+
+- O SCRIPT USA '}' AO INVÉS DE ')'..  ELE TENTA DE FORMA INCORRETA CLASSIFICAR VÁRIAS EXTENSÕES DE IMAGENS DE UMA VEZ.. ALÉM DISSO NÃO HÁ UM 'IF' FAZENDO AS DEVIDAS VERIFICAÇÕES PARA EXECUTAR A SAÍDA 'ECHO' CORRETAMENTE E NEM O 'ELSE', DESSA FORMA ELE ESTÁ APENAS ESCREVENDO O TEXTO ENTRE ASPAS..
+
+---------------------------------------------------------------------------------------------
+
+2-(valor 1,5 pontos) Crie um script chamado envia_github “mensagem”
+Este script deverá enviar todos os arquivos modificados para o github. 
+
+Com isso evita-se a necessidade de digitar todos os comando do git sempre que 
+quiser subir um arquivo para o repositorio Github.com
+
+
+	#!/bin/bash
+
+	echo "Este script envia os arquivos modificados para o github.. "
+	echo "Entre com a mensagem do commit"
+	read mensagem
+	do
+	 git add .
+	 git commit -m "$mensagem"
+	 git pull
+	 echo " Os arquivos foram enviados para o github!"
+
+
+---------------------------------------------------------------------------------------------------------
+
+3-(valor 2,0 pontos) Faça um script para receber um arquivo como parâmetro e se o arquivo 
+estiver vazio, excluí-lo seguido da mensagem, “arquivo xx excluído”.
+Senão, enviar mensagem “arquivo não pode ser excluído pois contém informações”
+Se o arquivo não existir, emitir mensagem “arquivo inexiste”
+
+	#!/bin/bash
+	arq=$1
+	if [ -f $arq ]
+	then
+	  if [ -s $arq ]
+	  then
+	    echo -e " Arquivo não pode ser excluído pois contém informações. "
+	  else
+	    rm $arq
+	    echo -e " Arquivo '$arq' excluído. "
+	  fi
+	else
+	  echo -e " Arquivo inexistente. "
+	fi
+
+--------------------------------------------------------------------------------------------------------
+
+4-(valor 2,0 pontos) Usando estrutura de repetição, faça um script para calcular e exibir quantas
+pastas e quantos arquivos tem na pasta atual.
+
+
+      #!/bin/bash
+      tudo=0
+      for tudo in $(ls | wc -l)
+      do 
+	 case "$tudo" in
+	    *)
+	       tudo=$(( $tudo + 1 ))
+	       ;; 
+	 esac
+      done
+      echo "Total de arquivos e pastas: $tudo"
+
+---------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
